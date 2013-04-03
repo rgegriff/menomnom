@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section>
+
+        <div id="home_left">
+            <div class="home_sidebar border_wrap">
+                {% if featured %}
+                    <div class="standard_header center bottom_blue"><h1>Featured Event</h1></div>
+
+                <div class="sidebar_container">
+                    {% if featured.img %}
+                    <img href="#mainPanel_featured" src="{{ featured.img.url_200x200 }}"/>
+                    {% endif %}
+                    <div class="sidebar_title">{{ featured.name }}</div>
+
+                </div>
+                {% endif %}
+            </div>
+
+
+            <!--
+
+            <div class="home_sidebar border_wrap">
+                <div class="standard_header center bottom_blue"><h1>Most Popular Event</h1></div>
+
+                <div class="sidebar_container">
+
+                        <img href="#mainPanel_popular" src="images/photo2.jpg" />
+
+                        <div class="sidebar_title">Tour the Church</div>
+
+                    </div>
+
+            </div>
+
+            -->
+
+        </div>
+
+        <div id="home_middle">
+
+            <div id="home_your_center" class="border_wrap">
+                <div class="main_header">
+
+                    <a class="main_page_tab" href="#mainPanel1">Your Events</a>
+
+                    <div class="tab_divide"></div>
+                    <div class="tab_divide"></div>
+                    <a class="main_page_tab" href="#mainPanel2">Your Specials
+                        <div class="specials_day_of_week">
+                            <script>printDay();</script>
+                        </div>
+                    </a>
+
+                    <div class="main_sidebar_event"><img src="{{ STATIC_URL }}images/x.png"/></div>
+
+                </div>
+
+                <div class="main_event_panel" id="mainPanel1">
+
+                    <!-- New Event Entry -->
+                    {% include 'main_event_list.html' %}
+                    <!-- End Event Entries -->
+
+                </div>
+
+                <div class="main_event_panel" id="mainPanel2">
+
+                    <!-- Begin Specials Entry -->
+
+                    {% include 'main_specials_list.html' %}
+
+                    <!-- End Specials -->
+
+                </div>
+                {% if featured %}
+                <div class="main_event_panel main_focus_event_outter" title="Featured Event" id="mainPanel_featured">
+
+                    <div class="main_focus_event">
+                        <h1>{{ featured.name }}</h1>
+                        {% if featured.location.dir_location %}
+                            <a href="/directory/{{ featured.location.dir_location.slug }}">{{ featured.location.dir_location.name }}</a>
+                        {% else %}
+                            {{ featured.location.name }}
+                            <p>
+                                {{ featured.location.address }}
+                            </p>
+                            {{ featured.location.phone }}
+                        {% endif %}                        <ul>
+                            <li>{{ featured.start_time|date:"P" }}</li>
+                            <li><span class="count">{{ featured.attended_by.count }}</span> Attending</li>
+                            <li>{% if featured.price == 0 %}Free{% else %}${{ featured.price|floatformat:"2" }}{% endif %}</li>
+                            <!--<div class="daily_event_button main_focus_button">Attend This Event</div>-->
+                        </ul>
+
+                        <h2>Event Details</h2>
+                        <article>
+                            {{ featured.description }}
+                        </article>
+                    </div>
+
+                </div>
+                {% endif %}
+
+                <div class="main_event_panel" title="Most Popular Event" id="mainPanel_popular">
+                    popular
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="home_right">
+
+            <div class="home_sidebar border_wrap">
+                <div class="standard_header center bottom_blue"><h1>Biz Bulletins</h1></div>
+                {% for post in object_list %}
+                    <div class="biz_home_message">
+
+                        <div class="biz_top_message"><a href="/directory/{{ post.location.slug }}">{{ post.location.name }}</a></div>
+
+                        <div class="biz_home_bottom_message">{{ post.message }}</div>
+                        {% if post.url %}
+                            <div class="biz_home_optional_link"><a href="{{ post.url }}">{{ post.urltext }}</a></div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                {% if not object_list %}
+                    <span class="login_empty">Coming Soon!</span>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}

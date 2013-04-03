@@ -1,0 +1,17 @@
+{% extends "manage.html" %}
+{% block content %}
+    <h5>{{ form_description }}</h5>
+    <p class="note"><strong>Note:</strong> To delete a field, click on the "X" on the right and save.</p>
+    {{ form }}
+    <form method="POST">
+        {{ formset.management_form }}
+        {% csrf_token %}
+        {% for form_row in formset %}
+            <div class="clonedFood">
+                {{ form_row.day.label }}:{{ form_row.day }}{{ form_row.day.errors }} {{ form_row.type.label }}:{{ form_row.type }}{{ form_row.type.errors }}{{ form_row.DELETE }}
+                {{ form_row.description }}{{ form_row.description.errors }}{{ form_row.id }}
+            </div>
+        {% endfor %}
+        <input style="float:left;" type="submit" value="Save Changes"/>
+    </form>
+{% endblock %}

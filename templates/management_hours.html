@@ -1,0 +1,24 @@
+{% extends 'manage.html' %}
+{% block content %}
+        <h5>{{ form_description }}</h5>
+        <div class="separator">
+        <form method="POST">
+            <table width="100%">
+                    {{ formset.management_form }}
+                    {% csrf_token %}
+                <colgroup class="table_hours_first"></colgroup>
+                <colgroup span="2" class="table_hours_last"></colgroup>
+                {% for form_row in formset.forms %}
+                <tr>{{ form_row.id }}
+                    <td> {{ form_row.instance.day_name }}{{ form_row.day }}</td>
+                    <td>{{ form_row.opening_time }}</td>
+                    <td>{{ form_row.closing_time }}</td>
+                </tr>
+                        {% endfor %}
+                <tr>
+                    <td><input type="submit" value="Save Changes"/></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Directory{% endblock %}
+{% block content %}
+    <div class="content-primary">
+    
+    	<ul data-role="listview" class="ui-listview">
+			{% for location in object_list %}
+            <li data-icon="arrow-r" data-iconpos="right" data-theme="c">
+                <a href="/directory/{{ location.slug }}/" class="ui-link-inherit">
+                    {{ location.name }}
+                <span class="ui-li-count ui-btn-up-c ui-btn-corner-all">{% if location.recent_posts.count %}{{ location.recent_posts.count }}{% else %}0{% endif %}</span>
+                </a>
+            </li>
+            {% endfor %}
+		</ul>
+       
+    </div><!-- /primary -->
+    {% endblock %}
+    

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Menomnom.com | Menomonie Restaurants, Bars and Events</title>
+
+<link rel="stylesheet" href="{{ STATIC_URL }}CSS/style.css" type="text/css">
+<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.elastic.source.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.char.left.js"></script>
+<script src="{{ STATIC_URL }}js/global.js"></script>
+
+</head>
+
+<body class="no_login_home">
+
+	<div class="home_logo_container">
+		<img src="{{ STATIC_URL }}images/homepage_logo.png" />
+    </div>
+    
+    <div class="home_button_container">
+    
+    	<a id="home_events_link" class="home_page_buttons" href="/events/weekly/">
+        	Upcoming Events
+        	<img src="{{ STATIC_URL }}images/icons/large_guitar.png" />
+        </a>
+        
+        <a id="home_specials_link" class="home_page_buttons" href="/specials/">
+        	Daily Specials
+        	<img src="{{ STATIC_URL }}images/icons/large_glass.png" />
+        </a>
+        
+        <a id="home_directory_link" class="home_page_buttons" href="/directory/">
+        	Directory
+        	<img src="{{ STATIC_URL }}images/icons/large_directory.png" />
+        </a>
+        
+        <a id="home_socialize_link" class="home_page_buttons" style="margin-right:0px;" href="/social/">
+        	Socialize
+        	<img src="{{ STATIC_URL }}images/icons/large_socialize.png" />
+        </a>
+    
+    </div>
+
+</body>
+</html>

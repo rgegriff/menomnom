@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Events{% endblock %}
+
+{% block content %}
+    <div class="content-primary">
+        <ul data-role="listview" data-theme="d" data-dividertheme="d">
+
+            {% for event in object_list %}
+                    <li>
+                        <a href="/events/{{ event.slug }}">
+                            {% if event.img %}<img src="{{ event.img.url }}" class="ui-li-thumb">{% endif %}
+                            <h3 class="ui-li-heading">{{ event.name }}</h3>
+                            <p class="ui-li-desc">{{ event.start_time|date:"F j @ P" }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+
+        </ul>
+    </div>
+{% endblock %}

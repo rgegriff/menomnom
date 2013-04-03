@@ -1,0 +1,23 @@
+{% extends "manage.html" %}
+{% block content %}
+    <h5>{{ form_description }}</h5>
+    <h2 style="margin-top:10px;">{{ form.description.label }}
+        <div id="char_carrier">
+            <span id="charsLeft"></span> characters left
+        </div>
+    </h2>
+    {{ form.description.errors }}
+    <form method="post">
+        {{ form.description }}
+        <script>$('#id_description').limit('350', '#charsLeft');</script>
+
+        <h2>{{ form.phone.label }}</h2>
+        {{ form.phone.errors }}
+        {{ form.phone }}
+        {% csrf_token %}
+        <input style="float:left;" type="submit" value="Save Changes"/>
+    </form>
+    
+    <a class="exposure_button" style="margin-top: 80px;" href="/submit-event/">Submit an Event</a>
+    
+{% endblock %}

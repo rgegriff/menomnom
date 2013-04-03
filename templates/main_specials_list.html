@@ -1,0 +1,21 @@
+{% for location in user.profile.get_my_location_specials %}
+    <div class="specials_outter_box">
+        <div class="specials_inner_box specials_inner_main">
+
+            <a href="/directory/{{ location.slug }}">{{ location.name }}</a>
+            <ul>
+                {% for special in location.location_special.all %}
+                    {% if special in user.profile.get_my_specials %}
+                        <li class="">{{ special.description }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endfor %}
+{% if not user.profile.get_my_location_specials %}
+    <div class="login_empty">
+        Your list is empty.
+        To add specials, go to the <a href="/specials/">specials section</a> and "star" the specials you wish to save.
+    </div>
+{% endif %}

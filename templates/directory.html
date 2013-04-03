@@ -1,0 +1,107 @@
+{% extends "base.html" %}{% block title %}Directory{% endblock %}
+{% load adzone_tags %}
+{% block scripts %}
+    <script src="{{ STATIC_URL }}js/directory.js"></script>
+{% endblock %}
+{% block content %}
+
+<div id="events_box" class="border_wrap">
+    <div class="standard_header bottom_blue"><h1>Menomonie Restaurants and Bars</h1></div>
+
+    <!-- Directory unit -->
+    {% for location in object_list %}
+    <div class="directory_outter_box {% for category in location.category.all %} cat_{{ category.slug }} {% endfor %}">
+
+        <div class="directory_upper">
+            <div id="id_{{ location.slug }}" class="directory_title">{{ location.name }} <span class="directory_category">{% for category in location.category.all %}{{ category.name }}{% if not forloop.last %} / {% endif %}{% endfor %}</span></div>
+            <div class="openClose {% if not location.is_open %}closed{% endif %}">{% if location.is_open %}Open{% else %}Closed{% endif %}</div>
+            <div class="directory_updates {% if not location.recent_posts.count %}zero_updates {% endif %}">{% if location.recent_posts.count %}{{ location.recent_posts.count }}{% else %}0{% endif %}</div>
+        </div>
+
+        <div class="directory_lower">
+
+            <div class="directory_lower_left">
+                <img src="{{ location.logo.url_148x148 }}"  />
+                <a class="directory_details_button" href="/directory/{{ location.slug }}">Additional Info</a>
+            </div>
+
+            <div class="directory_lower_right">
+                <div class="directory_upper_top">
+                    <div class="directory_recent_updates">
+                        <span class="directory_subheader">Recent Updates ({{ location.recent_posts.count }})</span>
+                        <ul>
+                            {% if location.recent_posts %}
+                            {% for post in location.recent_posts %}
+                            <li>
+                                {{ post.message }}
+                                <span class="time_span">— {{ post.post_time|timesince }} ago</span>
+                            </li>
+                            {% endfor %}
+                            {% else %}
+                            <li>No updates</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="directory_hours">
+
+                <ul>
+                    {% for hour in location.location_hour.all %}
+                        <li>{{ hour.day_name }}<span>{% if hour.opening_time == hour.closing_time %}Closed{% else %}{{ hour.opening_time|time:"P" }}<br />{{ hour.closing_time|time:"P" }}{% endif %}</span></li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+
+<!-- IF not logged in, display a login box (with info about starring) -->
+<div id="events_filter" class="border_wrap">
+    <div class="standard_header bottom_blue"><h1>Filter Results</h1></div>
+
+    <form id="directory_radio" name="filter_directory" method="post" action="">
+        {% for category in category_list %}
+        <input type="radio" name="Radio" id="cat_{{ category.slug }}" value="radio" />
+        <label for="cat_{{ category.slug }}">{{ category.name }}</label>
+        {% endfor %}
+
+        <input type="reset" name="Radio" id="reset" value="reset" />
+        <label for="reset">Reset</label>
+    </form>
+
+    <div id="mistake_button" class="standard_footer standard_footer_0_margin"><a href="#">Notice a mistake?</a></div>
+
+    <div class="skinny_contact">
+        <span id="msg_send_confirm" style="display: none;" >Your message has been sent</span>
+        <form method="post" name="mistake">
+            <textarea name="mistake_message"> </textarea>
+            <input type="hidden" name="next" value="{{ request.path }}"/>
+            {% csrf_token %}
+            <input name="submit" value="Report Mistake" type="submit" />
+        </form>
+
+
+    </div>
+
+</div>
+    <div id="events_filter" class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'directory-page' %}
+    </div>
+    <div id="events_filter" class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'directory-page' %}
+    </div>
+    <div id="events_filter" class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'directory-page' %}
+    </div>
+    <div id="events_filter" class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'directory-page' %}
+    </div>
+{% endblock %}

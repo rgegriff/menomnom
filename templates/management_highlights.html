@@ -1,0 +1,17 @@
+{% extends 'manage.html' %}
+{% block content %}
+    <form method="POST">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <h5>{{ form_description }}</h5>
+    <p class="note"><strong>Note:</strong> To delete a field, click on the "X" on the right and save.</p>
+    <div class="separator">
+        {% for form_row in formset %}
+            <div id="highlight1" class="clonedHighlight">
+                {{ form_row }}
+            </div>
+        {% endfor %}
+    </div>
+    <input style="float:left;" type="submit" value="Save Changes"/>
+    </form>
+{% endblock %}

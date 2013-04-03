@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MeNomNom {% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}mobile/css/style.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+</head>
+
+<body>
+
+<div data-role="page">
+
+    <div data-theme="b" data-role="header" data-id="global_head" data-position="fixed">
+        <h2>MeNomNom.com</h2>
+    </div><!-- /header -->
+    {% block content %}
+    {% endblock %}
+    <div data-role="footer" data-theme="b" class="ui-navbar-custom" data-id="global_footer" data-position="fixed">
+        <div data-theme="a" data-role="navbar" class="ui-navbar-custom">
+            <ul>
+                <li>
+                    <a class="nav_minheight" id="events" href="/events/weekly/" data-icon="custom">
+{#                        <img class="nav_image" src="{{ STATIC_URL }}mobile/images/events.png" /> #}
+                        Events
+                    </a>
+                </li>
+                <li>
+                    <a class="nav_minheight" id="specials" href="/specials/" data-icon="custom">
+
+{#                        <img class="nav_image" src="{{ STATIC_URL }}mobile/images/specials.png" />#}
+                        Specials
+                    </a>
+                </li>
+                <li>
+                    <a class="nav_minheight" id="directory" href="/directory/" data-icon="custom">
+{#                        <img class="nav_image" src="{{ STATIC_URL }}mobile/images/directory.png" />#}
+                        Directory
+                    </a>
+                </li>
+                <li>
+                    <a class="nav_minheight" id="bulletins" href="/bulletins/" data-icon="custom">
+{#                        <img class="nav_image" src="{{ STATIC_URL }}mobile/images/biz_bulletin.png" />#}
+                        Bulletins
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /footer -->
+    <style>
+        .ui-navbar-custom .ui-btn .ui-btn.inner {
+            font-size: 11px!important;
+            padding-top: 24px!important;
+            padding-bottom: 0px!important;
+        }
+
+        .ui-navbar-custom .ui-btn .ui-icon{
+            width: 30px!important;
+            height: 20px!important;
+            margin-left: -15px!important;
+            box-shadow: none!important;
+            -moz-box-shadow: none!important;
+            -webkit-box-shadow: none!important;
+            -webkit-border-radius: none !important;
+            border-radius: none !important;
+        }
+        #events .ui-icon{
+            background: url("{{ STATIC_URL }}mobile/images/events.png") 50% 50% no-repeat;
+            background-size: 22px 20px;
+        }
+        #specials .ui-icon{
+            background: url("{{ STATIC_URL }}mobile/images/specials.png") 50% 50% no-repeat;
+            background-size: 22px 20px;
+        }
+        #directory .ui-icon{
+            background: url("{{ STATIC_URL }}mobile/images/directory.png") 50% 50% no-repeat;
+            background-size: 22px 20px;
+        }
+        #bulletins .ui-icon{
+            background: url("{{ STATIC_URL }}mobile/images/biz_bulletin.png") 50% 50% no-repeat;
+            background-size: 22px 20px;
+        }
+
+    </style>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Events{% endblock %}
+{% block content %}
+    <div class="content-primary">
+    
+    	<h2>{{ object.name }}</h2>
+        
+        <div style="clear:both; overflow:auto">
+            {% if object.img %}
+            <img src="{{ object.img.url }}" class="img_max_width">
+            {% endif %}
+                <ul class="event_info">
+                    <li>
+                        {% if object.location.dir_location %}
+                            <a href="/directory/{{ object.location.dir_location.slug }}">{{ event.location.dir_location.name }}</a>
+                        {% else %}
+                            {{ object.location.name }}
+                            <address>
+                                {{ object.location.address }}
+                            </address>
+                            {{ object.location.phone }}
+                        {% endif %}
+                    </li>
+                    <li>
+                    	<h4>{{ object.start_time|date:"F j @ P" }}</h4>
+                    </li>
+                    <li>
+                    	<h4>{% if object.price = 0 %}Free!{% else %}${{ object.price }}{% endif %}</h4>
+                    </li>
+                </ul>  
+                 
+        </div>
+        {% if object.description %}
+        <h3>Event Description</h3>
+        <p>
+           {{ object.description }}
+        </p>
+        {% endif %}
+       
+    </div><!-- /primary -->
+{% endblock %}

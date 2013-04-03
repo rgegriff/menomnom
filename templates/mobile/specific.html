@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}| {{ object.name }}{% endblock %}
+{% block content %}
+<div class="content-primary">
+
+    <h2>{{ object.name }}</h2>
+
+    <div style="clear:both; overflow:auto">
+        <img src="{{ object.logo.url }}" class="specific_logo">
+
+        <ul class="event_info">
+            <li>
+                <h4>Address</h4>
+                <p>{{ object.street }}</p>
+                <p>{{ object.city }}, {{ object.state }} {{ object.zip }}</p>
+            </li>
+            <li>
+                <h4>Phone</h4>
+                <p>{{ object.phone }}</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <h3>Description</h3>
+    <p>
+        {{ object.description }}
+    </p>
+    {% if object.recent_posts %}
+        <ul class="ui-listview" data-role="listview" data-divider-theme="a">
+            <li data-role="list-divider" role="heading">Recent Updates</li>
+            {% for post in object.recent_posts %}
+                <li>{{ post.message }}</li>
+            {% endfor %}
+        </ul><br />
+    {% endif %}
+
+    <div class="ui-grid-a" style="background-color:#eee;">
+        <div class="ui-block-a">
+            <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+                <li data-role="list-divider" role="heading">Food Specials</li>
+                {% for special in object.location_special.food %}
+                    <li>({{ special.day_name }}) {{ special.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="ui-block-b">
+            <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+                <li data-role="list-divider" role="heading">Drink Specials</li>
+                {% for special in object.location_special.drink %}
+                    <li>({{ special.day_name }}) {{ special.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div><br />
+{% if object.location_highlights %}
+    <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+        <li data-role="list-divider" role="heading">Highlights</li>
+        {% for highlight in object.location_highlights.all %}
+            <li>{{ highlight.description }}</li>
+        {% endfor %}
+    </ul><br />
+{% endif %}
+    <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+        <li data-role="list-divider" role="heading">Hours</li>
+    </ul>
+
+    <table style="margin-left:12px;">
+        <tbody>
+        {% for hour in object.location_hour.all %}
+            <tr><td colspan="2"><strong>{{ hour.day_name|slice:":3" }}</strong></td></tr>
+            <tr><td>{% if hour.opening_time == hour.closing_time %}CLOSED</td>{% else %}{{ hour.opening_time|time:"P" }} - {{ hour.closing_time|time:"P" }}{% endif %}</td></tr>
+        {% endfor %}
+        </tbody></table>
+
+
+</div><!-- /primary -->
+{% endblock %}

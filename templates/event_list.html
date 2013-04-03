@@ -1,0 +1,51 @@
+{% for event in object_list %}
+    <div class="event_outter">
+
+        <div class="daily_event_inner">
+            <span class="id_holder" style="visibility: hidden; display:none;">{{ event.id }}</span>
+            <div class="daily_time">{{ event.start_time|date:"P" }}</div>
+
+            <h2 class="daily_title">{{ event.name }}</h2>
+
+            {% if event.img %}<img src="{{ event.img.url_144x144 }}" />{% endif %}
+
+            <ul>
+                <li class="daily_location">
+                    {% if event.location.dir_location %}
+                        <a href="/directory/{{ event.location.dir_location.slug }}">{{ event.location.dir_location.name }}</a>
+                    {% else %}
+                        <strong>{{ event.location.name }}</strong></li>
+                        <li class="event_date">{{ event.location.address }}</li>
+                        <li class="event_date">{{ event.location.phone }}</li>
+                    {% endif %}
+                </li>
+                <li class="event_date">{{ event.start_time|date:"M. d" }}</li>
+                <!--<li class="daily_attending"><span class="count">{{ event.attended_by.count }}</span> Attending</li>-->
+                <li class="daily_price">{% if event.price == 0 %}Free{% else %}${{ event.price|floatformat:"2" }}{% endif %}</li>
+                <!--<div class="daily_event_button {% if event in user.attending_events.all %}DEB_bg_active{% else %}DEB_bg_inactive{% endif %}">
+                    {% if event in user.attending_events.all %}Attending{% else %}Attend This Event{% endif %}</div>-->
+            </ul>
+
+            <div class="expand"><a href="#">Show details...</a></div>
+
+            <div class="event_more_info">
+                <h3>Event Details</h3>
+                <article>
+                    <p>
+                    {% if event.description and event.description.strip %}
+                    {{ event.description|safe }}
+                    {% else %}
+                    No additional information available.
+                    {% endif %}
+                    </p>
+                </article>
+            </div>
+
+        </div>
+    </div>
+{% endfor %}
+{% if not object_list %}
+    <div class="login_empty">
+        Currently no events for this time.
+    </div>
+{% endif %}

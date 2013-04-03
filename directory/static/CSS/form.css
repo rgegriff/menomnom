@@ -1,0 +1,113 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-color:#A6CCDB;
+	background-image:url(../images/login_bg.png);
+	background-repeat:no-repeat;
+	background-position: center 0px;
+}
+
+#container {
+	position:relative;
+	width:40%;
+	min-width:500px;
+	margin:135px auto 0px auto;
+	border: 8px #7894A0 solid;
+	background-color:#7894A0;
+	box-shadow: 0px 0px 15px rgba(0,0,0,.4);
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+#container_inner {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding:20px;
+	background-color: #F9F9F9;
+	overflow:auto;
+}
+
+#fixed_header {
+	position: absolute;
+	top:0px;
+	left:50%;
+	margin-left:-89px;
+}
+
+#container_inner h1 {
+	color: #333;
+	font-size: 18px;
+	text-align:center;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 3px;
+}
+
+#container_inner textarea {
+	width: 96%;
+	max-width: 96%;
+	min-width: 96%;
+	padding: 2%;
+	border:#ccc 1px solid;
+	line-height:18px;
+}
+
+#container_inner textarea[name="message"] {
+	height:120px;
+}
+
+#container_inner h2 {
+	margin:0px;
+	margin-top:10px;
+	font-size:13px;
+	color:#444;
+}
+
+#container_inner span {
+	color: #888;
+	font-size: 11px;
+}
+
+#container_inner input[type="text"],input[type="email"],input[type="date"] {
+	width: 98%;
+	padding:1%;
+	border:1px #ccc solid;
+}
+
+#container_inner input[type="submit"] {
+	width:100%;
+	cursor:pointer;
+	float:right;
+	margin-top: 10px;
+	border: 1px solid #9BBECD;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding:5px 10px;
+	text-align: center;
+	background-color: #9BBECD;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+}
+
+#container_inner input[type="submit"]:hover {
+	border-color:#87aebf;
+	background-color: #97b6c4;
+	box-shadow:0 1px 1px rgba(0, 0, 0, .1);
+	cursor:pointer;
+}
+
+.switch {
+	position:absolute;
+	bottom:-35px;
+	right:0px;
+	font-size:14px;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, .3);
+	color:white;
+}

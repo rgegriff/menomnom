@@ -1,0 +1,15 @@
+{% extends 'modal_page.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block form %}
+    <script type="text/javascript">
+        var next = "{% if next %}{{ next }}{% else %}/{% endif %}";
+        function redirect(){
+            document.location = next;
+        }
+        setTimeout(redirect, 5000);
+    </script>
+    <div id="login">
+        <h1>{{ headline }}</h1>
+        <p>{{ message }}</p>
+    </div>
+{% endblock %}

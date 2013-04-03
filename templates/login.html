@@ -1,0 +1,17 @@
+{% extends 'modal_page.html' %}
+{% block title %}Contact Us{% endblock %}
+{% block form %}
+<div id="login">
+    <h1>{{ headline }}</h1>
+
+    <form method="post" name="login">
+        {{ form.as_p }}
+        {% csrf_token %}
+        {% if next %}
+            <input type='hidden' name='next' value='{{ next }}'/>
+        {% endif %}
+        <input name="login" value="Sign In" type="submit" />
+    </form>
+
+</div>
+{% endblock %}

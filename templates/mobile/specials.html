@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Specials{% endblock %}
+{% block content %}
+    <div class="content-primary">
+        <!-- Start location unit -->
+        {% for location in object_list %}
+            <ul class="ui-listview" data-role="listview" data-divider-theme="a">
+                <li data-role="list-divider" role="heading"><h3>{{ location.name }}</h3></li>
+            </ul>
+            <!-- Start food special unit -->
+            <div class="ui-grid-a" style="background-color:#eee;">
+                <div class="ui-block-a">
+                    <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+                        <li data-role="list-divider" role="heading">Food Specials</li>
+                        {% for special in location.specials_today %}
+                            {% if special.type == "food" %}
+                                <li>{{ special.description }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- End food special unit -->
+                <!-- Start drink special unit -->
+                <div class="ui-block-b">
+                    <ul class="ui-listview" data-role="listview" data-divider-theme="d">
+                        <li data-role="list-divider" role="heading">Drink Specials</li>
+                        {% for special in location.specials_today %}
+                            {% if special.type == "drink" %}
+                                <li>{{ special.description }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- End drink special unit -->
+
+            </div>
+        {% endfor %}
+        <!-- End location unit -->
+
+
+    </div><!-- /primary -->
+{% endblock %}

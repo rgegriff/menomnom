@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Socialize{% endblock %}
+{% block scripts %}
+    <script src="{{ STATIC_URL }}js/social.js"></script>
+    <script src="{{ STATIC_URL }}js/date.js"></script>
+{% endblock %}
+{% block content %}
+	<div class="border_wrap" id="community_chatter">
+		<div class="standard_header bottom_blue"><h1>Community Chatter</h1></div>
+        
+        <div id="message_board_container">
+        
+        <!-- FB comment system -->
+        
+        <div class="fb-comments" data-href="http://menomnom.com/social/" data-num-posts="10" data-width="490" data-order-by="reverse_time"></div>
+        
+        </div>
+    
+    </div>
+    
+    <div id="business_buzz" class="border_wrap">
+    	<div class="standard_header bottom_blue"><h1>Business Buzz</h1></div>
+        
+        <div id="biz_message_board_container">
+
+            {% for post in biz_posts %}
+            <div class="biz_message">
+            
+            	<div class="biz_top_message"><a href="/directory/{{ post.manager.location.slug }}">{{ post.manager.all.0.location }}<span style="float:right; color:#888; font-weight:normal;">{{ post.post_time|timesince }}</span></a></div>
+                
+               	<div class="biz_bottom_message">
+                    {{ post.message }}
+                </div>
+                {% if post.url %}
+                <div class="biz_optional_link">
+                <a href="{{ post.url }}">{% if post.urltext %}{{ post.urltext }}{% else %}{{ post.url }}{% endif %}</a>
+                </div>
+                {% endif %}
+           	</div>
+            {% endfor %}
+            {% if not biz_posts %}
+            <div class="login_empty">
+                Coming Soon.
+            </div>
+            {% endif %}
+
+        </div>
+        
+    </div>
+{% endblock %}

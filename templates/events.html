@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load adzone_tags %}
+{% block title %}Events{% endblock %}
+{% block scripts %}<script src="{{ STATIC_URL }}js/events.js"></script>{% endblock %}
+{% block content %}
+    <div id="events_box" class="border_wrap">
+        <div class="main_header">
+            {% for span in spans %}
+                <a class="{% if page_type == "weekly" %}weekly_{% endif %}event_tab" href="/events/{{ page_type }}/{{ span.date|date:"Y/m/d/" }}">{{ span.dayname }}
+                    {% if page_type == "daily" %}<div class="event_date_box">{{ span.date|date:"b. d"|upper }}</div>{% endif %}
+                </a>
+                {% if not forloop.last %}<div class="tab_divide"> </div>{% endif %}
+            {% endfor %}
+        </div>
+        <div id="event_containment_field">
+            <!-- start event list -->
+            {% include 'event_list.html' %}
+            <!-- End Event List -->
+        </div>
+
+    </div>
+    <div id="events_filter" class="border_wrap">
+        <a href="/events/{{ other }}/" class="filter_bottom">Switch to {{ other }} view</a>
+    </div>
+
+
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'events-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'events-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'events-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'events-page' %}
+    </div>
+    <!--
+    <div class="border_wrap">
+        <div class="standard_header bottom_blue"><h1>Filter Results</h1></div>
+
+        <div id="popular_filter" class="filter_button">Popular</div>
+        <div id="music_filter" class="filter_button">Music</div>
+        <div id="community_filter" class="filter_button">Community</div>
+        <div id="fundraiser_filter" class="filter_button">Fundraiser</div>
+        <div id="other_filter" class="filter_button">Other</div>
+
+        <a href="weekly_events.html" class="filter_bottom">Switch to weekly view</a>
+
+    </div>
+    -->
+{% endblock %}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <title>{{ site }}MeNomNom | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}CSS/style.css" type="text/css">
+    {% block styles %}{% endblock %}
+
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.elastic.source.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.char.left.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.timepicker.js"></script>
+    <script src="{{ STATIC_URL }}js/global.js"></script>
+
+
+    {% block scripts %}{% endblock %}
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-24642943-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+
+<!-- FB comment system Javascript SDK -->
+
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=104781172960861";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- End FB comment system code -->
+
+{% load adzone_tags %}
+<div id="container">
+
+
+    <div id="header">
+        <div id="logo"><img src="{{ STATIC_URL }}images/MeNomNom_logo.png"/></div>
+
+        <div id="global_navigation">
+            <!--
+            <a href="/" id="home_link" class="global_link" title="Home">
+                <img src="{{ STATIC_URL }}images/icons/home.png" alt="Home" />
+                <h4>Home</h4>
+            </a>
+            -->
+            <a href="/events/weekly" id="events_link" class="global_link" title="Upcoming Events">
+                <img src="{{ STATIC_URL }}images/icons/guitar.png" alt="Upcoming Events"/>
+                <h4>Events</h4>
+            </a>
+            <a href="/specials" id="specials_link" class="global_link" title="Food and Drink Specials">
+                <img src="{{ STATIC_URL }}images/icons/glass.png" alt="Food and Drink Specials"/>
+                <h4>Specials</h4>
+            </a>
+            <a href="/directory" id="directory_link" class="global_link" title="Directory">
+                <img src="{{ STATIC_URL }}images/icons/directory.png" alt="Directory"/>
+                <h4>Directory</h4>
+            </a>
+            <a href="/social" id="socialize_link" class="global_link" title="Socialize">
+                <img src="{{ STATIC_URL }}images/icons/socialize.png" alt="Socialize"/>
+                <h4>Socialize</h4>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div id="main">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="footer">
+
+        <div id="footer_links">
+            <ul>
+                <!--<li><a href="#">About</a></li>
+                <li>|</li>-->
+                <li><a href="/contact/">Contact</a></li>
+                <li>|</li>
+                <li><a href="/submit-event/">Submit Event</a></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

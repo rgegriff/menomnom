@@ -1,0 +1,41 @@
+{% for event in user.profile.get_my_events %}
+    <div class="event_outter">
+        <div class="main_event_inner">
+
+            {% if event.img %}<div class="main_img_holder">
+                <img src="{{ event.img.url }}"  />
+                </div>{% endif %}
+            <h2>{{ event.name }}</h2>
+
+            <ul>
+                <li> {% if event.location.dir_location %}
+                    <a href="/directory/{{ event.location.dir_location.slug }}">{{ event.location.dir_location.name }}</a>
+                {% else %}
+                    {{ event.location.name }}
+                    <address>
+                        {{ event.location.address }}
+                    </address>
+                    {{ event.location.phonedate }}
+                {% endif %}</li>
+                <li>{{ event.start_time|date:"M d - P" }}.</li>
+                <li>{{ event.attended_by.count }} Attending</li>
+                <li>{% if event.price == 0 %}Free{% else %}${{ event.price|floatformat:"2" }}{% endif %}</li>
+            </ul>
+
+            <div class="expand expand_main_adjust"><a href="#">Show details...</a></div>
+
+            <div class="event_more_info event_more_info_adjust">
+                    <p>{{ event.description }}
+                    </p>
+
+            </div>
+
+        </div>
+    </div>
+{% endfor %}
+{% if not user.profile.get_my_events %}
+<div class="login_empty">
+    Your list is empty.
+    To add events, go to the <a href="/events/weekly/">events section</a> and click "Attend This Event" on the events you're interested in.
+</div>
+{% endif %}

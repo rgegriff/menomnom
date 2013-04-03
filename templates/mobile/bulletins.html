@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Bulletins{% endblock %}
+{% block content %}
+    <div class="content-primary">
+            {% for object in object_list %}
+        	<ul class="ui-listview" data-role="listview" data-divider-theme="a">
+            	<li data-role="list-divider" role="heading"><h2>{{ object.manager.get.location.name }}</h2> <h3 class="ui-li-desc">{{ object.post_time|timesince }} ago</h3></li>
+                <li>{{ object.message }}</li>
+            </ul>
+            {% endfor %}
+
+	</div>
+{% endblock %}

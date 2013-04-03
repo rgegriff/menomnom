@@ -1,0 +1,7 @@
+{% for message in object_list %}
+    <div class="message">
+        <span class='message_id' style='visibility: hidden;'>{0}</span>
+        <div class="top_message"><h1>{{ message.user.username }}</h1><p>{{ message.posted|time:"P" }}</p></div>
+        <div class="bottom_message">{{ message.message }}</div>
+    </div>
+{% endfor %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load adzone_tags %}
+{% block title %} Specials {% endblock %}
+{% block scripts %}<script src="{{ STATIC_URL }}js/specials.js"></script>{% endblock %}
+
+{% block content %}
+    <script type="text/javascript">
+    extra_info = {
+        curday:"{{ curday }}"
+    };
+    </script>
+    <div id="events_box" class="border_wrap">
+        <div class="main_header">
+
+            <a id="day_0" class="event_tab specials_tab_margin" href="" onclick="setday(0)">Monday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_1" class="event_tab specials_tab_margin" href="" onclick="setday(1)">Tuesday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_2" class="event_tab specials_tab_margin" href="" onclick="setday(2)">Wednesday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_3" class="event_tab specials_tab_margin" href="" onclick="setday(3)">Thursday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_4" class="event_tab specials_tab_margin" href="" onclick="setday(4)">Friday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_5" class="event_tab specials_tab_margin" href="" onclick="setday(5)">Saturday</a>
+            <div class="tab_divide"> </div>
+            <a id="day_6" class="event_tab specials_tab_margin" href="" onclick="setday(6)">Sunday</a>
+
+        </div>
+
+
+            <!--LOCATION PANEL-->
+            {% for location in object_list %}
+                {% if location.special_days %}
+            <div class="specials_outter_box{% for day in location.special_days %} day_{{ day|lower }}{% endfor %}">
+
+                <div class="specials_inner_box">
+
+                    <a href="/directory/{{ location.slug }}/">{{ location.name }}</a>
+
+                    <div class="specials_img_holder"><a href="/directory/{{ location.slug }}/"><img src="{{ location.logo.url_148x148 }}" /></a></div>
+
+                    <ul id="specials_right_margin">
+                        <H1 class="special_header {% for day in location.food_special_days %} day_{{ day|lower }}{% endfor %}">Food Specials</H1>
+                        {% for special in location.location_special.food %}
+                        <li class="day_{{ special.day_name|lower }} {% if special in user.stared_specials.all %}specials_li_active{% endif %}" onclick="star({{ special.id }})">{{ special.description }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <ul>
+                        <H1 class="special_header {% for day in location.drink_special_days %} day_{{ day|lower }}{% endfor %}">Drink Specials</H1>
+                        {% for special in location.location_special.drink %}
+                            <li class="day_{{ special.day_name|lower }} {% if special in user.stared_specials.all %}specials_li_active{% endif %}" onclick="star({{ special.id }})">{{ special.description }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+                {% endif %}
+            {% endfor %}
+
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'specials-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'specials-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'specials-page' %}
+    </div>
+    <div class="border_wrap_ad">
+        {% random_zone_ad 'banner-ad' 'specials-page' %}
+    </div>
+{% endblock %}

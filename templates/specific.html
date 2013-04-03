@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %} {{ object.name }} {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}anythingSlider/anythingslider.css" type="text/css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}colorbox/colorbox.css" type="text/css">
+{% endblock %}
+{% block scripts %}
+<script src="{{ STATIC_URL }}anythingSlider/jquery.anythingslider.min.js"></script>
+<script src="{{ STATIC_URL }}colorbox/jquery.colorbox-min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="specific_box" class="border_wrap">
+    <div class="standard_header bottom_blue"><h1>{{ object.name }}</h1></div>
+
+    <div class="specific_main_left">
+        <img src="{{ object.logo.url_148x148 }}" />
+
+        <div class="specific_header_small">Address</div>
+        <div class="specific_body_text_small">
+            {{ object.street }}
+            {{ object.city }}, {{ object.state }} {{ object.zip }}
+        </div>
+
+        <div class="specific_header_small">Phone</div>
+        <div class="specific_body_text_small">
+        {{ object.phone }}
+        </div>
+
+        <div class="specific_header_small">Hours</div>
+        <table>
+            {% for hour in object.location_hour.all %}
+            <tr><td colspan="3"><strong>{{ hour.day_name }}</strong></td></tr><tr><td>{% if hour.opening_time == hour.closing_time %}CLOSED</td>{% else %}{{ hour.opening_time|time:"P" }} - {{ hour.closing_time|time:"P" }}{% endif %}</td></tr>
+            {% endfor %}
+        </table>
+
+
+    </div>
+
+    <div class="specific_main_right">
+
+        <div class="specific_header">Description</div>
+
+        <div class="specific_body_text">
+            {{ object.description|safe }}
+        </div>
+
+        <div class="specific_header">Recent Updates ({{ object.recent_posts.count }})</div>
+
+        <ul>
+            {% if object.recent_posts %}
+                {% for post in location.recent_posts %}
+                    <li>
+                        {{ post.message }}
+                        <span class="time_span">— {{ post.posted|timesince }}</span>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No updates</li>
+            {% endif %}
+        </ul>
+        {% if object.location_special.food %}
+        <div class="specific_header">Food Specials</div>
+        <ul>
+            {% for special in object.location_special.food %}
+            <li>{{ special.day_name }} : {{ special.description }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if object.location_special.drink %}
+            <div class="specific_header">Drink Specials</div>
+            <ul>
+                {% for special in object.location_special.drink %}
+                    <li>{{ special.day_name }} : {{ special.description }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+
+</div>
+
+<!-- IF not logged in, display a login box (with info about starring) -->
+
+<div id="specific_sidebar" class="border_wrap">
+
+    <div class="specific_sidebar_inner">
+        {% if object.location_photos.count > 0 %}
+        <div id="slider">
+            {% for photo in object.location_photos.all %}
+            <div><a href="{{ photo.image.url }}" class="grouping"><img src="{{ photo.image.url_280x280 }}" /></a></div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <br />
+        <div class="specific_header">Highlights</div>
+
+        <ul>
+            {% if not object.location_highlights %}
+                <li>None</li>
+            {% else %}
+                {% for highlight in object.location_highlights.all %}
+                    <li>{{ highlight.description }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}

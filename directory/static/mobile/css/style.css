@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.nav_image {
+	display:block;
+	margin:7px auto;	
+}
+
+.nav_minheight {
+	min-height: 81px;	
+}
+
+p {
+	line-height:140%;	
+}
+
+.img_max_width {
+	max-width: 120px;
+	float:left;
+}
+
+.event_info {
+	margin:0px;
+	float:left;
+	list-style:none;
+	padding-left:15px;
+}
+
+.event_info li p {
+	margin: 5px 0px;	
+}
+
+.event_info h4 {
+	margin:0px;
+}
+
+.event_info li {
+	margin:15px 0px;
+}
+
+.event_info li:first-of-type {
+	margin-top:5px;
+}
+
+.event_info li:last-of-type {
+	margin-top:5px;
+}
+
+.specific_logo {
+	width: 148px;
+	border: 1px #666 solid;
+	float:left;
+}

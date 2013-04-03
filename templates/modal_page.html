@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}CSS/login_register.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}CSS/smoothness/jquery-ui-1.8.23.custom.css" media="all">
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.elastic.source.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.char.left.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.timepicker.js"></script>
+    <script src="{{ STATIC_URL }}js/modal.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="fixed_header"><img src="{{ STATIC_URL }}images/logo_login_register.png" /></div>
+
+<div id="container">
+    <div id="container_inner">
+        {% block form %}
+            <div id="login">
+                <h1>{{ headline }}</h1>
+                <form method="post" name="login">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <input name="login" value="{{ button }}" type="submit" />
+                </form>
+            </div>
+        {% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

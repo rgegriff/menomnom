@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>MeNomNom.com Control Center</title>
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/admin_style.css" type="text/css" />
+    <link type="text/css" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.tzCheckbox.css" />
+
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.char.left.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.elastic.source.js"></script>
+    <script src="{{ STATIC_URL }}js/admin.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tzCheckbox.js"></script>
+
+
+</head>
+<body>
+
+<div id="fixed_container"></div>
+<div id="fixed_top"><p>{{ location.name }}</p>
+    <span class="nav" style="float: right; color:#fff;"><a href="/management/">general</a> • <a href="/management/hours/">hours</a> • <a href="/management/highlights">highlights</a> • <a href="/management/specials">specials</a> • <a href="/submit-event/">submit event</a></span></div>
+<div id="fixed_header"><img src="{{ STATIC_URL }}images/menomnom_control.png" /></div>
+
+<div id="main_container">
+
+    <div class="column">
+        <h1>{{ form_title }}</h1>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="column">
+
+    <!--    <div class="credits">24<span class="credits_small">Credits</span></div> -->
+
+        <div class="status_box">
+
+            <form method="post" action="/management/bulletin/">
+                <label for="id_message"><h4>Biz Bulletin</h4></label>
+                {{ bulletin_form.message.errors }}
+                {{ bulletin_form.message }}
+                <script>$('#id_message').limit('140','#charsLeftBulletin');</script>
+                <div id="char_carrier_bulletin">
+                    <span id="charsLeftBulletin"></span> characters left
+                </div>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path|urlize }}" />
+                <input type="submit" value="Post Update" />
+            </form>
+        </div>
+
+        <h2>Recent Updates</h2>
+        <ul>
+        	{% if manager.last_posts %}
+            {% for post in manager.last_posts %}
+            <li><span class="time_span">{{ post.post_time|timesince }} ago</span>{{ post.message }}</li>
+            {% endfor %}
+            {% else %}
+            <li>No recent posts</li>
+            {% endif %}
+        </ul>
+<!--
+        <h2 class="exposure_title">Increase your exposure</h2>
+
+        <p class="exposure">Check out the additional options and see what works for you!</p>
+
+        <a class="exposure_button" href="#">Additional Marketing Options</a>
+-->
+    </div>
+
+</div>
+
+</body>
+</html>
